@@ -2,10 +2,12 @@ package com.devspace.recyclerview
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
@@ -27,9 +29,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         val rvList = findViewById<RecyclerView>(R.id.rv_list)
+        val btnList = findViewById<ImageView>(R.id.btn_list)
+        val btnGrid = findViewById<ImageView>(R.id.btn_grid)
+
         rvList.layoutManager = LinearLayoutManager(this)
         rvList.adapter = adapter
         adapter.submitList(contacts)
+
+        btnList.setOnClickListener {
+            rvList.layoutManager = LinearLayoutManager(this)
+        }
+        btnGrid.setOnClickListener {
+            rvList.layoutManager = GridLayoutManager(this, 2)
+        }
 
         adapter.setOnClickListener {
             val intent = Intent(this, ContactDetailActivity::class.java)
@@ -113,4 +125,4 @@ private val contacts = listOf(
         image = R.drawable.sample16
     ),
 
-)
+    )
